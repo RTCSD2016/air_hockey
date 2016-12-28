@@ -1,0 +1,8 @@
+//
+// Created by troy on 12/28/16.
+//
+
+#ifndef AIR_HOCKEY_GLOBAL_VARIABLES_H
+#define AIR_HOCKEY_GLOBAL_VARIABLES_H
+
+#endif //AIR_HOCKEY_GLOBAL_VARIABLES_H
