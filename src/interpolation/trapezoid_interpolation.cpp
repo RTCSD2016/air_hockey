@@ -2,7 +2,7 @@
 // Created by troy on 12/29/16.
 //
 
-#include "TrapezoidInterpolation.h"
+#include "trapezoid_interpolation.h"
 
 #include <stdexcept>
 
