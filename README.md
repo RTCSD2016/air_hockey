@@ -18,3 +18,12 @@ Air Hockey
 |	机械1301	|	张启宁	|	U201210709	|	[KNCheung](https://github.com/KNCheung)	|
 |	机制1303	|	周佩	|	U201310616	|	[ritsuzp](https://github.com/ritsuzp)	|
 |	机械1304	|	朱凯	|	U201310678	|	[KaiZhuhhhhhh](https://github.com/KaiZhuhhhhhh)	|
+
+What's New
+-----------
++ 2016-12-29
+    - 补充协定
+    - 完成插值类接口
+
++ 2016-12-28
+    - 团队完成组建

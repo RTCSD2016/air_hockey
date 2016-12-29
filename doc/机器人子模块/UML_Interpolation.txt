@@ -1,6 +1,7 @@
 
 @startuml
 interface Interpolation {
+    - string type;
     - double position;
     - double velocity;
     - double acceleration;
@@ -10,6 +11,7 @@ interface Interpolation {
     + {abstract} virtual int start(TimeStamp, double, double)=0;
     + {abstract} virtual int move(TimeStamp)=0;
     -- Get Methods --
+    + string get_type();
     + double get_position();
     + double get_velocity();
     + double get_acceleration();
@@ -17,11 +19,13 @@ interface Interpolation {
 }
 
 interface InterpolationConfigure {
+    - double target_time;
     - double target_position;
     - double target_velocity;
-    - double target_acceleration;
-    - double target_jerk;
+    - double max_acceleration;
+    - double max_jerk;
 
+    + void set_time(double);
     + void set_position(double);
     + void set_velocity(double);
     + void set_acceleration(double);
