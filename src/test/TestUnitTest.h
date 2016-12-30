@@ -8,15 +8,15 @@
 #ifndef AIR_HOCKEY_TESTUNITTEST_H
 #define AIR_HOCKEY_TESTUNITTEST_H
 
-#include <cppunit/extensions/HelperMacros.h>
+#include <cppunit/extensions/HelperMacros.h>      // 必须的头文件
 
 class TestUnitTest: public CppUnit::TestFixture {
-    CPPUNIT_TEST_SUITE(TestUnitTest);
-        CPPUNIT_TEST(test_success);
-        CPPUNIT_TEST(test_fail);
-        CPPUNIT_TEST(test_double_success);
-        CPPUNIT_TEST(test_double_fail);
-    CPPUNIT_TEST_SUITE_END();
+    CPPUNIT_TEST_SUITE(TestUnitTest);         // 测试集声明开始
+        CPPUNIT_TEST(test_success);           // 测试函数1
+        CPPUNIT_TEST(test_fail);              // 测试函数2
+        CPPUNIT_TEST(test_double_success);    // 测试函数3
+        CPPUNIT_TEST(test_double_fail);       // 测试函数4
+    CPPUNIT_TEST_SUITE_END();                 // 测试集声明结束
 
 public:
     void test_success();

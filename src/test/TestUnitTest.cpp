@@ -4,8 +4,8 @@
 
 #include "TestUnitTest.h"
 
-CPPUNIT_TEST_SUITE_REGISTRATION(TestUnitTest);  // registry to global suite
-CPPUNIT_TEST_SUITE_NAMED_REGISTRATION(TestUnitTest, "unit_test" );  // registry to unique suite
+CPPUNIT_TEST_SUITE_REGISTRATION(TestUnitTest);                      // 注册到全局测试集
+CPPUNIT_TEST_SUITE_NAMED_REGISTRATION(TestUnitTest, "unit_test" );  // 注册为单一测试集
 
 void TestUnitTest::test_success() {
     CPPUNIT_ASSERT(true);
