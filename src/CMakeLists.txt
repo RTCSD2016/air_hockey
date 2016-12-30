@@ -1,6 +1,20 @@
-
 find_package(XENOMAI REQUIRED)
+if(XENOMAI_FOUND)
+    message("xenomai found")
+endif()
+
 find_package(ODE REQUIRED)
+if(ODE_FOUND)
+    message("ode found")
+endif()
+if(DRAWSTUFF_FOUND)
+    message("drawstuff found")
+endif()
+
+find_package(CppUnit REQUIRED)
+if(CPPUNIT_FOUND)
+    message("CppUnit found")
+endif()
 
 INCLUDE_DIRECTORIES(.)
 INCLUDE_DIRECTORIES(${XENOMAI_INCLUDE_DIRS})
@@ -18,3 +32,8 @@ ADD_SUBDIRECTORY(interpolation)
 TARGET_LINK_LIBRARIES(air_hockey ${XENOMAI_NATIVE_SKIN_LIBS})
 TARGET_LINK_LIBRARIES(air_hockey ${ODE_LIBS})
 TARGET_LINK_LIBRARIES(air_hockey interpolation jsoncpp)
+
+# =========== TEST ===========
+AUX_SOURCE_DIRECTORY(./test TEST_FILES)
+ADD_EXECUTABLE(unit_test unit_test.cpp ${TEST_FILES})
+target_link_libraries(unit_test ${CPPUNIT_LIBRARY})
