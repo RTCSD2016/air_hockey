@@ -25,7 +25,7 @@ LINK_DIRECTORIES(${ODE_LIBRARIES_DIRS})
 
 AUX_SOURCE_DIRECTORY(./tasks ALL_TASKS)
 
-ADD_EXECUTABLE(air_hockey main.cpp global_variables.cpp ${ALL_TASKS})
+ADD_EXECUTABLE(air_hockey main.cpp common.cpp ${ALL_TASKS})
 
 ADD_SUBDIRECTORY(interpolation)
 

@@ -8,7 +8,7 @@
 #ifndef AIR_HOCKEY_TRAPEZOIDINTERPOLATION_H
 #define AIR_HOCKEY_TRAPEZOIDINTERPOLATION_H
 
-#include <interpolation.h>
+#include "interpolation.h"
 
 class TrapezoidInterpolation final : public Interpolation,
                                      public InterpolationConfigure {

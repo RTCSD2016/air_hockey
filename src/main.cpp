@@ -8,39 +8,46 @@
 #include <rtdk.h>
 #include <native/task.h>
 
-#include <global_variables.h>
+#include <common.h>
 #include <tasks/all_tasks.h>
 
 namespace AirHockey {
-    RT_TASK task_trajectory_generator_x;
-    RT_TASK task_trajectory_generator_y;
+    RT_TASK rttask_trajectory_generator_x;
+    RT_TASK rttask_trajectory_generator_y;
+    RT_TASK rttask_strategy;
 
     void task_init(void) {
-        rt_task_create(&task_trajectory_generator_x,
+        rt_task_create(&rttask_trajectory_generator_x,
                        "trajectory generator x",
                        0, 95, T_JOINABLE);
-        rt_task_create(&task_trajectory_generator_y,
+        rt_task_create(&rttask_trajectory_generator_y,
                        "trajectory generator y",
                        0, 95, T_JOINABLE);
+        rt_task_create(&rttask_strategy,
+                       "strategy",
+                       0, 93, T_JOINABLE);
     }
 
     void task_start(void) {
-        rt_task_start(&task_trajectory_generator_x, &task_trajectory_generator::main, (void *) &axis_x);
-        rt_task_start(&task_trajectory_generator_y, &task_trajectory_generator::main, (void *) &axis_y);
+        rt_task_start(&rttask_trajectory_generator_x, &task_trajectory_generator::main, (void *) &axis_x);
+        rt_task_start(&rttask_trajectory_generator_y, &task_trajectory_generator::main, (void *) &axis_y);
+        rt_task_start(&rttask_strategy, &task_strategy::main, NULL);
     }
 
     void task_join(void) {
-        rt_task_join(&task_trajectory_generator_x);
-        rt_task_join(&task_trajectory_generator_y);
+        rt_task_join(&rttask_trajectory_generator_x);
+        rt_task_join(&rttask_trajectory_generator_y);
+        rt_task_join(&rttask_strategy);
     }
 
     void task_delete(void) {
-        rt_task_delete(&task_trajectory_generator_x);
-        rt_task_delete(&task_trajectory_generator_y);
+        rt_task_delete(&rttask_trajectory_generator_x);
+        rt_task_delete(&rttask_trajectory_generator_y);
+        rt_task_delete(&rttask_strategy);
     }
 }
 
-void signal_handler(int n) {
+void terminate_signal_handler(int n) {
     rt_printf("[main] catch signal: %d\n", n);
     rt_event_signal(&event, event_mask::kTerminate);
 }
@@ -54,8 +61,8 @@ int main(int argc, char **argv) {
     rt_printf("[main] init global variables\n");
     init_global_variables();
 
-    signal(SIGINT, signal_handler);
-    signal(SIGTERM, signal_handler);
+    signal(SIGINT, terminate_signal_handler);
+    signal(SIGTERM, terminate_signal_handler);
 
     rt_printf("[main] init tasks\n");
     task_init();
