@@ -3,12 +3,12 @@
 //
 
 #include "strategy.h"
-#include "common.h"
 
 #include <native/task.h>
 #include <native/queue.h>
 #include <native/event.h>
 
+#include "common.h"
 #include <interpolation/interpolation.h>
 #include <interpolation/trapezoid_interpolation.h>
 #include <rtdk.h>

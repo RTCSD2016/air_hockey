@@ -15,6 +15,7 @@ namespace AirHockey {
     RT_TASK rttask_trajectory_generator_x;
     RT_TASK rttask_trajectory_generator_y;
     RT_TASK rttask_strategy;
+    RT_TASK rttask_physics_engine;
 
     void task_init(void) {
         rt_task_create(&rttask_trajectory_generator_x,
@@ -26,24 +27,30 @@ namespace AirHockey {
         rt_task_create(&rttask_strategy,
                        "strategy",
                        0, 93, T_JOINABLE);
+        rt_task_create(&rttask_physics_engine,
+                       "physics_engine",
+                       0, 94, T_JOINABLE);
     }
 
     void task_start(void) {
         rt_task_start(&rttask_trajectory_generator_x, &task_trajectory_generator::main, (void *) &axis_x);
         rt_task_start(&rttask_trajectory_generator_y, &task_trajectory_generator::main, (void *) &axis_y);
         rt_task_start(&rttask_strategy, &task_strategy::main, NULL);
+        rt_task_start(&rttask_physics_engine, &task_physics_engine::main, NULL);
     }
 
     void task_join(void) {
         rt_task_join(&rttask_trajectory_generator_x);
         rt_task_join(&rttask_trajectory_generator_y);
         rt_task_join(&rttask_strategy);
+        rt_task_join(&rttask_physics_engine);
     }
 
     void task_delete(void) {
         rt_task_delete(&rttask_trajectory_generator_x);
         rt_task_delete(&rttask_trajectory_generator_y);
         rt_task_delete(&rttask_strategy);
+        rt_task_delete(&rttask_physics_engine);
     }
 }
 
