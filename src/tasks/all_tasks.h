@@ -7,5 +7,6 @@
 
 #include "trajectory_generator.h"
 #include "strategy.h"
+#include "physics_engine.h"
 
 #endif //AIR_HOCKEY_ALL_TASKS_H
