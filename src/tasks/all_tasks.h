@@ -6,5 +6,6 @@
 #define AIR_HOCKEY_ALL_TASKS_H
 
 #include "trajectory_generator.h"
+#include "strategy.h"
 
 #endif //AIR_HOCKEY_ALL_TASKS_H

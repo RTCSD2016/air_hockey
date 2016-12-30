@@ -2,7 +2,7 @@
 // Created by troy on 12/28/16.
 //
 
-#include <global_variables.h>
+#include <common.h>
 #include "interpolation/interpolation.h"
 
 RT_QUEUE queue_axis_x, queue_axis_y;

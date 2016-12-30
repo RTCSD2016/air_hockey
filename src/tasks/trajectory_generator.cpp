@@ -4,9 +4,8 @@
 
 #include "trajectory_generator.h"
 
-#include <iostream>
 #include <stdexcept>
-#include <global_variables.h>
+#include <common.h>
 
 #include <rtdk.h>
 #include <native/task.h>
@@ -18,6 +17,9 @@
 
 namespace task_trajectory_generator {
     void main(void *arg) {
+        auto axis = (AxisStatus *) arg;
+        rt_printf("[traj_%s] hello\n", axis->name);
+
         rt_task_set_periodic(NULL, TM_NOW, 1000000);
 
         enum TaskState {
@@ -27,8 +29,6 @@ namespace task_trajectory_generator {
         TaskState state = kTaskIdle;
         Interpolation *interpolation = nullptr;
 
-        auto axis = (AxisStatus *) arg;
-        rt_printf("[traj_%s] hello\n", axis->name);
         RT_QUEUE queue_command;
         if (rt_queue_bind(&queue_command, axis->name, TM_NONBLOCK)) {
             rt_printf("[traj_%s] queue not found\n", axis->name);
@@ -65,7 +65,7 @@ namespace task_trajectory_generator {
                     memcpy(&interpolation, msg, sizeof(Interpolation *));
                     rt_queue_free(&queue_command, msg);
 
-                    std::cerr << "Receive command: " << interpolation->get_type() << std::endl;
+                    rt_printf("[traj_%s] receive command\n", axis->name);
 
                     if (interpolation->start(rt_timer_read() / 1e9,
                                              axis->position,
@@ -73,7 +73,7 @@ namespace task_trajectory_generator {
                         state = kTaskRunning;
                     else {
                         state = kTaskError;
-                        std::cerr << "Error occurred\nProgram paused" << std::endl;
+                        rt_printf("[traj_%s] Error Occurred\n", axis->name);
                         break;
                     }
                 case kTaskRunning: {
@@ -83,7 +83,7 @@ namespace task_trajectory_generator {
                     switch (ret) {
                         case kIntError:
                             state = kTaskError;
-                            std::cerr << "Error occurred" << std::endl;
+                            rt_printf("[traj_%s] Error Occurred\n", axis->name);
                             break;
                         case kIntRunning:
                             break;
@@ -92,7 +92,7 @@ namespace task_trajectory_generator {
                             break;
                         default:
                             state = kTaskError;
-                            std::cerr << "unknown state" << std::endl;
+                            rt_printf("[traj_%s] unknown state\n", axis->name);
                             break;
                     }
                 }
@@ -110,7 +110,7 @@ namespace task_trajectory_generator {
         }
 
         TRAJECTORY_GENERATED_TERMINATED:
-        rt_printf("[traj_%s] terminated\n", axis->name);
+        rt_printf("[traj_%s] exit\n", axis->name);
         if (interpolation)
             delete (interpolation);
     }
