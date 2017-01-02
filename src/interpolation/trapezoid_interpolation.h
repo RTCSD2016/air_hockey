@@ -1,16 +1,16 @@
-///
-// Created by 张启宁 on 12/29/16.
+//
+// Created by troy on 12/29/16.
 //
 
 #pragma once
 
-#ifndef SIMPLE_MOTION_TRAPEZOID_INTERPOLATION_H
-#define SIMPLE_MOTION_TRAPEZOID_INTERPOLATION_H
+#ifndef AIR_HOCKEY_TRAPEZOID_INTERPOLATION_H
+#define AIR_HOCKEY_TRAPEZOID_INTERPOLATION_H
 
 #include "interpolation.h"
 
 class TrapezoidInterpolation final : public Interpolation,
-                                     public InterpolationConfigure{
+                                     public InterpolationConfigure {
 private:
     InterpolationState interpolate_state;
     std::string type;
@@ -55,4 +55,4 @@ public:
 };
 
 
-#endif //SIMPLE_MOTION_TRAPEZOID_INTERPOLATION_H
+#endif //AIR_HOCKEY_TRAPEZOID_INTERPOLATION_H

@@ -1,5 +1,5 @@
 //
-// Created by 张启宁 on 12/29/16.
+// Created by troy on 12/29/16.
 //
 
 #include "trapezoid_interpolation.h"
