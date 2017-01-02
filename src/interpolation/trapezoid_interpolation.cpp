@@ -3,7 +3,6 @@
 //
 
 #include "trapezoid_interpolation.h"
-#include "interpolation.h"
 
 #include <stdexcept>
 #include <iostream>
@@ -21,12 +20,8 @@ InterpolationState TrapezoidInterpolation::start(const TimeInS now,
     if (this->check() != kIntIdle)
         return kIntIdle;
 
-//    this->p = start_position;
-//    this->v = start_velocity;
-//    this->j = 0;
-	
 	//added by 周佩 on 2017/1/2.
-	//为简化公式，使用一些替换参数a,b,c,x,t求解二元一次方程
+	//为简化公式，使用一些替换参数a,b,c,x,t求解二次方程
 
 	double t;
 	double x;
@@ -48,8 +43,6 @@ InterpolationState TrapezoidInterpolation::start(const TimeInS now,
 	delta_t3 = (start_velocity - velocity) / a + delta_t1;
 	delta_t2 = t - delta_t1 - delta_t3;
 
-	//changed by 周佩 on 2017/1/2
-
     state = kAcceleration;
     t0 = now;
     s0.position = start_position;
@@ -64,7 +57,7 @@ InterpolationState TrapezoidInterpolation::start(const TimeInS now,
     t2 = t1 + delta_t2;
     s2.position = s1.position + s1.velocity * (t2 - t1);
     s2.velocity = s1.velocity;
-    s2.acceleration = - acceleration;//取负值就不用变公式了
+    s2.acceleration = - acceleration;
 
     t3 = t2 + delta_t3;
     s3.position = position;

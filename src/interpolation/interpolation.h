@@ -33,11 +33,6 @@ protected:
     double acceleration;
     double jerk;
 
-//    double p;//added by 周佩 on 2017/1/2.
-//    double v;
-//    double a;
-//    double j;
-
     /**
      * @brief Not allow create instance directly
      */
