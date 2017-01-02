@@ -96,7 +96,7 @@ public:
 };
 
 class InterpolationConfigure {
-private:
+protected:
     double target_time;
     double target_position;
     double target_velocity;
