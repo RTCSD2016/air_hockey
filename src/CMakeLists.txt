@@ -29,7 +29,7 @@ TARGET_LINK_LIBRARIES(air_hockey ${ODE_LIBS})
 TARGET_LINK_LIBRARIES(air_hockey interpolation jsoncpp)
 
 # =========== TEST ===========
-find_package(CppUnit REQUIRED)
+find_package(CppUnit)
 if(CPPUNIT_FOUND)
     message("CppUnit found")
     AUX_SOURCE_DIRECTORY(./test TEST_FILES)
