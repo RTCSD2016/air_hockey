@@ -21,7 +21,7 @@ InterpolationState TrapezoidInterpolation::start(const TimeInS now,
         return kIntIdle;
 
 	//added by 周佩 on 2017/1/2.
-	//为简化公式，使用一些替换参数a,b,c,x,t求解二次方程
+	//为简化公式，使用一些参数a,b,c,x,t替换式子，以便求解二次方程
 
 	double t;
 	double x;
