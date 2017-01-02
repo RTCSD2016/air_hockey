@@ -8,19 +8,31 @@
 #include <native/queue.h>
 #include <native/event.h>
 
+#include <stdexcept>
+
 #include "common.h"
 #include <interpolation/interpolation.h>
 #include <interpolation/trapezoid_interpolation.h>
 #include <rtdk.h>
 
 namespace task_strategy {
+    RT_QUEUE &axis_to_queue(char axis) {
+        switch (axis) {
+            case 'x':
+                return queue_axis_x;
+            case 'y':
+                return queue_axis_y;
+            default:
+                throw new std::logic_error("WRONG ARGUMENT: no such axis");
+        }
+    }
     int send_command_trapezoid(RT_QUEUE &queue,
                                const double time,
                                const double position,
                                const double velocity,
                                const double acceleration) {
 
-        auto new_cmd = (TrapezoidInterpolation **) rt_queue_alloc(&queue, sizeof(InterpolationConfigure *));
+        auto new_cmd = (InterpolationConfigure **) rt_queue_alloc(&queue, sizeof(InterpolationConfigure *));
         *new_cmd = new TrapezoidInterpolation();
         (*new_cmd)->set_time(time);
         (*new_cmd)->set_position(position);
@@ -28,7 +40,7 @@ namespace task_strategy {
         (*new_cmd)->set_acceleration(acceleration);
         return rt_queue_send(&queue,
                              new_cmd,
-                             sizeof(Interpolation *),
+                             sizeof(InterpolationConfigure *),
                              Q_NORMAL);
     }
 
