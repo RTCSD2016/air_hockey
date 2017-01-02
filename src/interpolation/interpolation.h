@@ -1,5 +1,5 @@
 //
-// Created by 张启宁 on 12/12/16.
+// Created by 张启宁 on 12/29/16.
 //
 
 #pragma once
@@ -32,6 +32,11 @@ protected:
     double velocity;
     double acceleration;
     double jerk;
+
+    double p;//added by 周佩 on 2017/1/2.
+    double v;
+    double a;
+    double j;
 
     /**
      * @brief Not allow create instance directly
@@ -96,7 +101,7 @@ public:
 };
 
 class InterpolationConfigure {
-private:
+protected:
     double target_time;
     double target_position;
     double target_velocity;
