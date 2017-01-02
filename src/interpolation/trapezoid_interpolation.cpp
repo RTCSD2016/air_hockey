@@ -21,9 +21,9 @@ InterpolationState TrapezoidInterpolation::start(const TimeInS now,
     if (this->check() != kIntIdle)
         return kIntIdle;
 
-    this->p = start_position;
-    this->v = start_velocity;
-    this->j = 0;
+//    this->p = start_position;
+//    this->v = start_velocity;
+//    this->j = 0;
 	
 	//added by 周佩 on 2017/1/2.
 	//为简化公式，使用一些替换参数a,b,c,x,t求解二元一次方程
@@ -85,45 +85,45 @@ InterpolationState TrapezoidInterpolation::move(const TimeInS now) {
 	switch (this->state) {
         case kAcceleration:
             if (now >= t1) {
-                this->p = s1.position;
-                this->v = s1.velocity;
-                this->a = s1.acceleration;
+                this->position = s1.position;
+                this->velocity = s1.velocity;
+                this->acceleration = s1.acceleration;
                 state = kLinear;
                 // No Break; Linear Uniform Moving at once
                 std::cerr << "switch to state <Linear>" << std::endl;
             } else {
-                this->p = s0.position + 0.5 * this->acceleration * (now - t0) * (now - t0);
-                this->v = s0.velocity + this->acceleration * (now - t0);
-                this->a = s0.acceleration;
+                this->position = s0.position + 0.5 * this->acceleration * (now - t0) * (now - t0);
+                this->velocity = s0.velocity + this->acceleration * (now - t0);
+                this->acceleration = s0.acceleration;
                 return kIntRunning;
             }
             // Linear Uniform Moving
         case kLinear:
             if (now >= t2) {
-                this->p = s2.position;
-                this->v = s2.velocity;
-                this->a = s2.acceleration;
+                this->position = s2.position;
+                this->velocity = s2.velocity;
+                this->acceleration = s2.acceleration;
                 state = kDeceleration;
                 // No Break; Decelerating at once
                 std::cerr << "switch to state <Dec>" << std::endl;
             } else {
-                this->p = s1.position + s1.velocity * (now - t1);
-                this->v = s1.velocity;
-                this->a = s1.acceleration;
+                this->position = s1.position + s1.velocity * (now - t1);
+                this->velocity = s1.velocity;
+                this->acceleration = s1.acceleration;
                 return kIntRunning;
             }
         case kDeceleration:
             if (now >= t3) {
-                this->p = s3.position;
-                this->v = s3.velocity;
-                this->a = s3.acceleration;
+                this->position = s3.position;
+                this->velocity = s3.velocity;
+                this->acceleration = s3.acceleration;
                 state = kEnd;
                 // No Break; Stop at once
                 std::cerr << "switch to state <End>" << std::endl;
             } else {
-                this->p = s2.position + 0.5 * this->acceleration * (now - t2) * (now - t2);
-                this->v = s2.velocity + this->acceleration * (now - t2);
-                this->a = s2.acceleration;
+                this->position = s2.position + 0.5 * this->acceleration * (now - t2) * (now - t2);
+                this->velocity = s2.velocity + this->acceleration * (now - t2);
+                this->acceleration = s2.acceleration;
                 return kIntRunning;
             }
         case kEnd:
