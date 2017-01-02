@@ -13,8 +13,8 @@ TrapezoidInterpolation::TrapezoidInterpolation() {
     this->type = "trapezoid interpolation";
 }
 
-InterpolationState TrapezoidInterpolation::start(const TimeInS now, 
-												 const double start_position,
+InterpolationState TrapezoidInterpolation::start(const TimeInS now,
+                                                 const double start_position,
                                                  const double start_velocity) {
  //   throw new std::logic_error("not implemented");
     if (this->check() != kIntIdle)
