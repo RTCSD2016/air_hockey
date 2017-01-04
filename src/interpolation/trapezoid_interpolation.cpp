@@ -4,22 +4,19 @@
 
 #include "trapezoid_interpolation.h"
 
-#include <stdexcept>
-#include <iostream>
-#include <iomanip>
-#include <math.h>
+#include <cmath>
 
 TrapezoidInterpolation::TrapezoidInterpolation() {
     this->type = "trapezoid interpolation";
 }
 
+InterpolationState TrapezoidInterpolation::check() {
+
+}
+
 InterpolationState TrapezoidInterpolation::start(const TimeInS now,
                                                  const double start_position,
                                                  const double start_velocity) {
- //   throw new std::logic_error("not implemented");
-    if (this->check() != kIntIdle)
-        return kIntIdle;
-
 	//added by 周佩 on 2017/1/2.
 	//为简化公式，使用一些参数a,b,c,x,t替换式子，以便求解二次方程
 
@@ -64,17 +61,10 @@ InterpolationState TrapezoidInterpolation::start(const TimeInS now,
     s3.velocity = velocity;
     s3.acceleration = 0;
 
-
-    std::cerr << "start @" << std::setiosflags(std::ios::fixed) << t0 << std::endl <<
-              "acc until " << t1 << std::endl <<
-              "dec @" << t2 << std::endl <<
-              "stop @" << t3 << std::endl;
-    std::cerr << "switch to state <Acc>" << std::endl;
 return kIntIdle;
 }
 
 InterpolationState TrapezoidInterpolation::move(const TimeInS now) {
- //   throw new std::logic_error("not implemented");
 	switch (this->state) {
         case kAcceleration:
             if (now >= t1) {
@@ -83,7 +73,6 @@ InterpolationState TrapezoidInterpolation::move(const TimeInS now) {
                 this->acceleration = s1.acceleration;
                 state = kLinear;
                 // No Break; Linear Uniform Moving at once
-                std::cerr << "switch to state <Linear>" << std::endl;
             } else {
                 this->position = s0.position + 0.5 * this->acceleration * (now - t0) * (now - t0);
                 this->velocity = s0.velocity + this->acceleration * (now - t0);
@@ -98,7 +87,6 @@ InterpolationState TrapezoidInterpolation::move(const TimeInS now) {
                 this->acceleration = s2.acceleration;
                 state = kDeceleration;
                 // No Break; Decelerating at once
-                std::cerr << "switch to state <Dec>" << std::endl;
             } else {
                 this->position = s1.position + s1.velocity * (now - t1);
                 this->velocity = s1.velocity;
@@ -112,7 +100,6 @@ InterpolationState TrapezoidInterpolation::move(const TimeInS now) {
                 this->acceleration = s3.acceleration;
                 state = kEnd;
                 // No Break; Stop at once
-                std::cerr << "switch to state <End>" << std::endl;
             } else {
                 this->position = s2.position + 0.5 * this->acceleration * (now - t2) * (now - t2);
                 this->velocity = s2.velocity + this->acceleration * (now - t2);
@@ -122,7 +109,6 @@ InterpolationState TrapezoidInterpolation::move(const TimeInS now) {
         case kEnd:
             return kIntDone;
         default:
-            std::cerr << "WTF" << std::endl;
             return kIntError;
 	}
 }

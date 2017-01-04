@@ -25,8 +25,30 @@ Air Hockey
 |	机制1303	|	周佩	|	U201310616	|	[ritsuzp](https://github.com/ritsuzp)	|
 |	机械1304	|	朱凯	|	U201310678	|	[KaiZhuhhhhhh](https://github.com/KaiZhuhhhhhh)	|
 
+编译&运行
+---------
+
+0. 环境要求
+    + 编译环境
+        + xenomai 2.6.5 开发库
+        + jsoncpp 库
+        + CppUnit 库（可选，未装则不会生成单元测试文件）
+    + 运行环境
+        + 正常运行 Xenomai 2.6.5 内核的 Linux 系统
+        + Xenomai 需装有 Native Skin
+1. 创建生成文件夹
+2. 执行命令：`cmake <工程根目录>`
+3. 执行编译命令：`make`
+4. 在生成文件夹下的`build`目录下有生成的二进制文件
+6. 执行
+    + 单元测试：`build/unit_test`
+    + 主程序：`build/air_hockey`
+
 What's New
 -----------
++ 2017-01-04
+    - 代码调整；补充文档
+    
 + 2017-01-02
     - 完成插值模块的编写（插值小组）
     - 代码编译通过，没有语法错误

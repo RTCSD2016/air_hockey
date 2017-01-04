@@ -2,7 +2,7 @@
 // Created by troy on 12/30/16.
 //
 
-#include "TestUnitTest.h"
+#include "UnitTestTest.h"
 
 CPPUNIT_TEST_SUITE_REGISTRATION(TestUnitTest);                      // 注册到全局测试集
 CPPUNIT_TEST_SUITE_NAMED_REGISTRATION(TestUnitTest, "unit_test" );  // 注册为单一测试集
