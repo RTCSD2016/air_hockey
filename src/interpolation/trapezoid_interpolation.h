@@ -26,11 +26,6 @@ private:
     } s0, s1, s2, s3;
 
 public:
-    double position;
-    double velocity;
-    double acceleration;
-    double deceleration;
-
     TrapezoidInterpolation();
 
     virtual ~TrapezoidInterpolation();
