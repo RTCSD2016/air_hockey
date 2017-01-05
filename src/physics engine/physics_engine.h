@@ -10,11 +10,11 @@
 namespace task_physics_engine {
     void main(void *arg);
 
-	enum direction_vector{ X, Y, AXIS_COUNT };
-	enum flag1{ ungoal, win,lose }goal_flag;//进球标志
-	enum flag2{ table_col, stick_col }collision_flag;//碰撞标志
+    enum direction_vector{ X, Y, AXIS_COUNT };
+    enum flag1{ ungoal, win,lose }goal_flag;//进球标志
+    enum flag2{ table_col, stick_col }collision_flag;//碰撞标志
 
-	static double default_puck_radius = 5;//半径5mm	
+    static double default_puck_radius = 5;//半径5mm	
     static double default_puck_mass = 1;//质量1kg
     
     static double default_table_length = 200;//球桌长200mm
