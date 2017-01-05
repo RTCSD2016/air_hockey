@@ -18,10 +18,15 @@ namespace task_physics_engine {
         goalline = goal_length;
     }
 
-    Hockey_stick::Hockey_stick(double hockey_stick_radius, double hockey_stick_mass)
+    Hockey_stick::Hockey_stick(double hockey_stick_radius)
     {
         radius = default_hockey_stick_radius;
-        mass = default_hockey_stick_mass;
+        
+        cur_position[X] = 50;
+		cur_position[Y] = 0;
+
+		velocity[X] = 0;
+		velocity[Y] = 0;
     }
 
     void main(void *arg) {
