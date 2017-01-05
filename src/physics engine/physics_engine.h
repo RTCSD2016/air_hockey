@@ -22,7 +22,7 @@ namespace task_physics_engine {
     
     static double default_hockey_stick_radius = 10;//击球器半径10mm
     
-	static double default_goal_length = 30;//球门长度30mm，位于短边中央
+    static double default_goal_length = 30;//球门长度30mm，位于短边中央
     
     class Puck{
     private:
