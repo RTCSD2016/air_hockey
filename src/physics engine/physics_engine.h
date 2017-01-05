@@ -70,7 +70,7 @@ namespace task_physics_engine {
         double velocity[AXIS_COUNT];
 
         Hockey_stick(double hockey_stick_radius = default_hockey_stick_radius){};	
-        void stick_check();
+        void stick_check();//击球器限位
     };
 }
 
