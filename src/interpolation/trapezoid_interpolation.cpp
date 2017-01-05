@@ -36,7 +36,7 @@ InterpolationState TrapezoidInterpolation::start(const TimeInS now,
     b = target_velocity - start_velocity + a * t;
     c = start_velocity * t - x - (start_velocity - target_velocity) * (start_velocity - target_velocity) / (2 * a);
 
-    delta_t1 = (b + sqrt(b * b + 4 * a * c)) / (2 * a);
+    delta_t1 = (b - sqrt(b * b + 4 * a * c)) / (2 * a);
     delta_t3 = (start_velocity - target_velocity) / a + delta_t1;
     delta_t2 = t - delta_t1 - delta_t3;
 
