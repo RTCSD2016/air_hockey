@@ -16,7 +16,7 @@ void TrapezoidInterpolationTest::base_function() {
     algorithm.set_time(25);
     algorithm.set_position(300);
     algorithm.set_velocity(0);
-    algorithm.set_acceleration(2);
+    algorithm.set_acceleration(20);
 
     algorithm.start(0, 0, 0);
 
