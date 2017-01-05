@@ -13,8 +13,8 @@ namespace task_physics_engine {
         cur_position[X] = 50;
         cur_position[Y] = 100;
 
-		velocity[X] = 10;
-		velocity[Y] = 0;
+        velocity[X] = 10;
+        velocity[Y] = 0;
     }
 
     Table::Table(double table_length, double table_width, double goal_length)
@@ -29,10 +29,10 @@ namespace task_physics_engine {
         radius = default_hockey_stick_radius;
         
         cur_position[X] = 50;
-		cur_position[Y] = 0;
+        cur_position[Y] = 0;
 
-		velocity[X] = 0;
-		velocity[Y] = 0;
+        velocity[X] = 0;
+        velocity[Y] = 0;
     }
 
     void main(void *arg) {
