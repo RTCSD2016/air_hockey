@@ -31,20 +31,20 @@ InterpolationState TrapezoidInterpolation::start(const TimeInS now,
 	double delta_t3;
 
 	t = target_time - now;
-	x = position - start_position;
-	a = acceleration;
-	b = velocity - start_velocity + a * t;
-	c = start_velocity * t - x - (start_velocity - velocity) * (start_velocity - velocity) / (2 * a);
+	x = target_position - start_position;
+	a = max_acceleration;
+	b = target_velocity - start_velocity + a * t;
+	c = start_velocity * t - x - (start_velocity - target_velocity) * (start_velocity - target_velocity) / (2 * a);
 
     delta_t1 = (b + sqrt(b*b + 4*a*c)) / (2*a);
-	delta_t3 = (start_velocity - velocity) / a + delta_t1;
+	delta_t3 = (start_velocity - target_velocity) / a + delta_t1;
 	delta_t2 = t - delta_t1 - delta_t3;
 
     state = kAcceleration;
     t0 = now;
     s0.position = start_position;
     s0.velocity = start_velocity;
-    s0.acceleration = acceleration;
+    s0.acceleration = max_acceleration;
 
 	t1 = now + delta_t1;
     s1.position = s0.position + s0.velocity * delta_t1 + 0.5 * s0.acceleration * delta_t1 * delta_t1;
@@ -54,11 +54,11 @@ InterpolationState TrapezoidInterpolation::start(const TimeInS now,
     t2 = t1 + delta_t2;
     s2.position = s1.position + s1.velocity * (t2 - t1);
     s2.velocity = s1.velocity;
-    s2.acceleration = - acceleration;
+    s2.acceleration = - max_acceleration;
 
     t3 = t2 + delta_t3;
-    s3.position = position;
-    s3.velocity = velocity;
+    s3.position = target_position;
+    s3.velocity = target_velocity;
     s3.acceleration = 0;
 
 return kIntIdle;
