@@ -1,3 +1,7 @@
+#include "physics_engine.h"
+
+#include <stdexcept>
+
 Puck::Puck(double puck_radius, double puck_mass)
     {
         radius = puck_radius;
