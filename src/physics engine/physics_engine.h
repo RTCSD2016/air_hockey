@@ -54,8 +54,7 @@ namespace task_physics_engine {
     public:
         double length;
         double width;
-        double goalline1;
-        double goalline2;
+        double goalline;
 
         Table(double table_length = default_table_length, double table_width = default_table_width, double goal_length = default_goal_length){};
     };
