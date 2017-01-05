@@ -69,7 +69,8 @@ namespace task_physics_engine {
         double pre_position[AXIS_COUNT], cur_position[AXIS_COUNT];
         double velocity[AXIS_COUNT];
 
-        Hockey_stick(double hockey_stick_radius = default_hockey_stick_radius){};				
+        Hockey_stick(double hockey_stick_radius = default_hockey_stick_radius){};	
+        void stick_check();
     };
 }
 
