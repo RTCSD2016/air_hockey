@@ -16,6 +16,21 @@ namespace task_physics_engine {
         velocity[X] = 10;
         velocity[Y] = 0;
     }
+    
+    void Puck::check_collision()
+    {
+    
+    }
+    
+    void Puck::update_position()
+    {
+    
+    }
+    
+    void Puck::update_velocity()
+    {
+    
+    }
 
     Table::Table(double table_length, double table_width, double goal_length)
     {
@@ -24,15 +39,21 @@ namespace task_physics_engine {
         goalline = goal_length;
     }
 
-    Hockey_stick::Hockey_stick(double hockey_stick_radius)
+    Hockey_stick::Hockey_stick(double hockey_stick_radius, double hockey_stick_mass)
     {
-        radius = default_hockey_stick_radius;
+        radius = hockey_stick_radius;
+        mass = hockey_stick_mass;
         
         cur_position[X] = 50;
         cur_position[Y] = 0;
 
         velocity[X] = 0;
         velocity[Y] = 0;
+    }
+    
+    void Hockey_stick::stick_check()
+    {
+    
     }
 
     void main(void *arg) {
