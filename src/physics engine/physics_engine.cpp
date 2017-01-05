@@ -9,6 +9,12 @@ namespace task_physics_engine {
     {
         radius = puck_radius;
         mass = puck_mass;
+        
+        cur_position[X] = 50;
+		cur_position[Y] = 100;
+
+		velocity[X] = 10;
+		velocity[Y] = 0;
     }
 
     Table::Table(double table_length, double table_width, double goal_length)
