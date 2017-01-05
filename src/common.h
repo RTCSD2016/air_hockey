@@ -15,6 +15,7 @@ typedef struct {
 } AxisStatus;
 
 extern AxisStatus axis_x, axis_y;
+extern AxisStatus ball_x, ball_y;
 
 extern RT_EVENT event;
 namespace event_mask {

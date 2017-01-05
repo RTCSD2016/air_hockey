@@ -7,6 +7,7 @@
 
 RT_QUEUE queue_axis_x, queue_axis_y;
 AxisStatus axis_x, axis_y;
+AxisStatus ball_x, ball_y;
 RT_EVENT event;
 
 void init_global_variables(void) {
@@ -17,6 +18,14 @@ void init_global_variables(void) {
     axis_y.position = 0;
     axis_y.velocity = 0;
     strcpy(axis_y.name, "axis_y");
+
+    ball_x.position = 0;
+    ball_x.velocity = 0;
+    strcpy(ball_x.name, "ball_x");
+
+    ball_y.position = 0;
+    ball_y.velocity = 0;
+    strcpy(ball_y.name, "ball_y");
 
     rt_event_create(&event, "event: command", event_mask::kNone, EV_FIFO);
 
