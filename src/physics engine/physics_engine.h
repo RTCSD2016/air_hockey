@@ -1,8 +1,6 @@
-
 //
 // Created by troy on 12/30/16.
 //
-
 
 #pragma once
 
@@ -16,18 +14,16 @@ namespace task_physics_engine {
 	enum flag1{ ungoal, win,lose }goal_flag;//进球标志
 	enum flag2{ table_col, stick_col }collision_flag;//碰撞标志
 
-	static double default_puck_radius = 0;
-	static double default_puck_mass = 0;
-
-	static double default_table_length = 0;
-	static double default_table_width = 0;
-
-	static double default_hockey_stick_radius = 0;
-	static double default_hockey_stick_mass = 0;
-	
-	static double default_goal_length1 = 0;
-	static double default_goal_length2 = 0;
-	
+	static double default_puck_radius = 5;//半径5mm	
+    static double default_puck_mass = 1;//质量1kg
+    
+    static double default_table_length = 200;//球桌长200mm
+    static double default_table_width = 100;//球桌宽100mm
+    
+    static double default_hockey_stick_radius = 10;//击球器半径10mm
+    
+	static double default_goal_length = 30;//球门长度30mm，位于短边中央
+    
     class Puck{
     private:
         double collision_time;
@@ -61,7 +57,7 @@ namespace task_physics_engine {
         double goalline1;
         double goalline2;
 
-        Table(double table_length = default_table_length, double table_width = default_table_width, double goal_length1 = default_goal_length1, double goal_length2 = default_goal_length2){};
+        Table(double table_length = default_table_length, double table_width = default_table_width, double goal_length = default_goal_length){};
     };
 
     class Hockey_stick{
@@ -71,11 +67,10 @@ namespace task_physics_engine {
 
     public:
         double radius;
-        double mass;
         double pre_position[AXIS_COUNT], cur_position[AXIS_COUNT];
         double velocity[AXIS_COUNT];
 
-        Hockey_stick(double hockey_stick_radius = default_hockey_stick_radius, double hockey_stick_mass = default_hockey_stick_mass){};				
+        Hockey_stick(double hockey_stick_radius = default_hockey_stick_radius){};				
     };
 }
 
