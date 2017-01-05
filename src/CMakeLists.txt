@@ -26,7 +26,7 @@ ADD_SUBDIRECTORY(interpolation)
 
 TARGET_LINK_LIBRARIES(air_hockey ${XENOMAI_NATIVE_SKIN_LIBS})
 TARGET_LINK_LIBRARIES(air_hockey ${ODE_LIBS})
-TARGET_LINK_LIBRARIES(air_hockey interpolation jsoncpp)
+TARGET_LINK_LIBRARIES(air_hockey interpolation)
 
 # =========== TEST ===========
 find_package(CppUnit)

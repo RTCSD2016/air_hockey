@@ -31,7 +31,6 @@ Air Hockey
 0. 环境要求
     + 编译环境
         + xenomai 2.6.5 开发库
-        + jsoncpp 库
         + CppUnit 库（可选，未装则不会生成单元测试文件）
     + 运行环境
         + 正常运行 Xenomai 2.6.5 内核的 Linux 系统
