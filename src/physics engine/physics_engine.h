@@ -21,6 +21,7 @@ namespace task_physics_engine {
     static double default_table_width = 100;//球桌宽100mm
     
     static double default_hockey_stick_radius = 10;//击球器半径10mm
+    static double default_hockey_stick_mass = 5kg;
     
     static double default_goal_length = 30;//球门长度30mm，位于短边中央
     
@@ -66,10 +67,11 @@ namespace task_physics_engine {
 
     public:
         double radius;
+        double mass;
         double pre_position[AXIS_COUNT], cur_position[AXIS_COUNT];
         double velocity[AXIS_COUNT];
 
-        Hockey_stick(double hockey_stick_radius = default_hockey_stick_radius){};	
+        Hockey_stick(double hockey_stick_radius = default_hockey_stick_radius, double hockey_stick_mass = default_hockey_stick_mass){};	
         void stick_check();//击球器限位
     };
 }
