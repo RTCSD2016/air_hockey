@@ -22,7 +22,7 @@ namespace task_physics_engine {
         if(cur_position[X] <= 5 || cur_position[X] >= 95) velocity[X] = -velocity[X];
         if(cur_position[Y] <= 5 || cur_position[Y] >= 195) velocity[Y] = -velocity[Y];//撞桌子
         
-        if((cur_position[X] - ) * (cur_position[X] - ) + (cur_position[Y] - ) * (cur_position[Y] - ) <= 225)
+        if((cur_position[X] - ball_x.position) * (cur_position[X] - ball_x.position) + (cur_position[Y] - ball_y.position) * (cur_position[Y] - ball_y.position) <= 225)
     }
     
     void Puck::update_position()
