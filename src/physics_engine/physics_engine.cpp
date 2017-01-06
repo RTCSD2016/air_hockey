@@ -19,25 +19,40 @@ namespace task_physics_engine {
     
     void Puck::check_collision()
     {
-        if(cur_position[X] <= 5 || cur_position[X] >= 95) velocity[X] = -velocity[X];
+        if(cur_position[X] <= 5 || cur_position[X] >= 95) 
+        {
+            goal_flag = ungoal;
+            velocity[X] = -velocity[X];
+        }
+        
         if(cur_position[Y] <= 5 || cur_position[Y] >= 195)
         {
             if(cur_position[X] < 65 && cur_position[X] > 35)
             {
-                if(cur_position[Y] <= 5) goal_flag = 1;
-                if(cur_position[Y] >= 195) goal_flag = 2;
+                if(cur_position[Y] <= 5) goal_flag = lose;
+                if(cur_position[Y] >= 195) goal_flag = win;
 
                 velocity[X] = 0;
                 velocity[Y] = 0;
-            } else {velocity[Y] = -velocity[Y];}
+            } else {velocity[Y] = -velocity[Y]; goal_flag = ungoal}
         }
         
-        if((cur_position[X] - ball_x.position) * (cur_position[X] - ball_x.position) + (cur_position[Y] - ball_y.position) * (cur_position[Y] - ball_y.position) <= 225)
+        if((cur_position[X] - axis_x.position) * (cur_position[X] - axis_x.position) + (cur_position[Y] - axis_y.position) * (cur_position[Y] - axis_y.position) <= 225)
+        {
+            double slope;
+            double speed_temp;
+            
+            slope = (cur_position[Y] - axis_y.position) / (1.0 * (cur_position[X] - axis_x.position));
+            
+            speed_temp = velocity[Y];
+            velocity[Y] = axis_y.velocity + (velocity[X] - 2 * axis_x.velocity) * slope;
+            velocity[X] = axis_x.velocity + (speed_temp - 2 * axis_y.velocity) / slope;
+        }
     }
     
     void Puck::update_position()
     {
-        if(goal_flag > 0)
+        if(goal_flag != ungoal)
         {
             cur_position[X] = 50;
             cur_position[Y] = 100;
