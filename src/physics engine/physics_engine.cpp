@@ -19,7 +19,10 @@ namespace task_physics_engine {
     
     void Puck::check_collision()
     {
-    
+        if(cur_position[X] <= 5 || cur_position[X] >= 95) velocity[X] = -velocity[X];
+        if(cur_position[Y] <= 5 || cur_position[Y] >= 195) velocity[Y] = -velocity[Y];//撞桌子
+        
+        if((cur_position[X] - ) * (cur_position[X] - ) + (cur_position[Y] - ) * (cur_position[Y] - ) <= 225)
     }
     
     void Puck::update_position()
@@ -53,7 +56,10 @@ namespace task_physics_engine {
     
     void Hockey_stick::stick_check()
     {
-    
+        if(cur_position[X] <= 0) cur_position[X] = 0;
+        if(cur_position[X] >= 100) cur_position[X] = 100;
+        if(cur_position[Y] <= 0) cur_position[Y] = 0;
+        if(cur_position[Y] >= 200) cur_position[Y] = 200;
     }
 
     void main(void *arg) {
