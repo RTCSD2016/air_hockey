@@ -24,8 +24,8 @@ namespace task_physics_engine {
         {
             if(cur_position[X] < 65 && cur_position[X] > 35)
             {
-                if(cur_position[Y] <= 5) goal_flag = 1;
-                if(cur_position[Y] >= 195) goal_flag = 2;
+                if(cur_position[Y] <= 5) goal_flag = lose;
+                if(cur_position[Y] >= 195) goal_flag = win;
 
                 velocity[X] = 0;
                 velocity[Y] = 0;
@@ -37,7 +37,7 @@ namespace task_physics_engine {
     
     void Puck::update_position()
     {
-        if(goal_flag > 0)
+        if(goal_flag != ungoal)
         {
             cur_position[X] = 50;
             cur_position[Y] = 100;
