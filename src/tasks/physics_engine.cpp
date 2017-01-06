@@ -10,7 +10,17 @@
 #include "common.h"
 
 namespace task_physics_engine {
+
+    void send_event_collide(void) {
+        rt_event_signal(&event, event_mask::kCollide);
+    }
+
+    void send_event_game_over(void) {
+        rt_event_signal(&event, event_mask::kGameOver);
+    }
+
     void main(void *arg) {
+        UNUSED(arg);
         rt_printf("[physics_engine] hello\n");
 
         unsigned long mask;
