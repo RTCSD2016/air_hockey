@@ -7,10 +7,10 @@
 #ifndef AIR_HOCKEY_PHYSICS_ENGINE_H
 #define AIR_HOCKEY_PHYSICS_ENGINE_H
 
-namespace task_physics_engine {
+namespace physics_engine {
     enum direction_vector{ X, Y, AXIS_COUNT };
-    enum flag1{ ungoal, win,lose }goal_flag;//进球标志
-    enum flag2{ table_col, stick_col }collision_flag;//碰撞标志
+    enum flag1{ ungoal, win,lose } goal_flag;//进球标志
+    enum flag2{ un_col, table_col, stick_col } collision_flag;//碰撞标志
 
     static double default_puck_radius = 5;//半径5mm	
     static double default_puck_mass = 1;//质量1kg
@@ -19,7 +19,7 @@ namespace task_physics_engine {
     static double default_table_width = 100;//球桌宽100mm
     
     static double default_hockey_stick_radius = 10;//击球器半径10mm
-    static double default_hockey_stick_mass = 5kg;
+    static double default_hockey_stick_mass = 5;//击球器质量5kg
     
     static double default_goal_length = 30;//球门长度30mm，位于短边中央
 
@@ -29,7 +29,7 @@ namespace task_physics_engine {
         double collision_position[AXIS_COUNT];
 
         void check_collision();//检查碰撞
-        void update_position();//更新位置
+        void update_position(double step_time);//更新位置
         void update_velocity();//更新速度
 
     protected:
@@ -40,9 +40,12 @@ namespace task_physics_engine {
         double pre_position[AXIS_COUNT], cur_position[AXIS_COUNT];//上一步和现在的位置
         double velocity[AXIS_COUNT];
         double mass;
+        void (*on_collide)(void) = nullptr;
+        void (*on_game_over)(void) = nullptr;
 
-        void dWorldStep();//更新物理状态
+        void dWorldStep(double step_time);//更新物理状态
         Puck(double r = default_puck_radius, double m = default_puck_mass);
+        void new_ball(AxisStatus new_ball_x, AxisStatus new_ball_y);
     };
 
     class Table{

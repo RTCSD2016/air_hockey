@@ -4,7 +4,7 @@
 #include <rtdk.h>
 #include "common.h"
 
-namespace task_physics_engine {
+namespace physics_engine {
     Puck::Puck(double puck_radius, double puck_mass)
     {
         radius = puck_radius;
@@ -19,35 +19,84 @@ namespace task_physics_engine {
     
     void Puck::check_collision()
     {
-        if(cur_position[X] <= 5 || cur_position[X] >= 95) velocity[X] = -velocity[X];
+        collision_flag = un_col;
+        
+        if(cur_position[X] <= 5 || cur_position[X] >= 95) 
+        {
+            goal_flag = ungoal;
+            velocity[X] = -velocity[X];
+            collision_flag = table_col;
+            if(on_collide != nullptr) on_collide();
+        }
+        
         if(cur_position[Y] <= 5 || cur_position[Y] >= 195)
         {
             if(cur_position[X] < 65 && cur_position[X] > 35)
             {
-                if(cur_position[Y] <= 5) goal_flag = 1;
-                if(cur_position[Y] >= 195) goal_flag = 2;
-
-                velocity[X] = 0;
-                velocity[Y] = 0;
-            } else {velocity[Y] = -velocity[Y];}
+                if(cur_position[Y] <= 5) {goal_flag = lose; if(on_game_over != nullptr) on_game_over();}
+                if(cur_position[Y] >= 195) {goal_flag = win; if(on_game_over != nullptr) on_game_over();}
+                
+            } else {velocity[Y] = -velocity[Y]; goal_flag = ungoal; collision_flag = table_col; if(on_collide != nullptr) on_collide();}
         }
         
-        if((cur_position[X] - ball_x.position) * (cur_position[X] - ball_x.position) + (cur_position[Y] - ball_y.position) * (cur_position[Y] - ball_y.position) <= 225)
+        if((cur_position[X] - axis_x.position) * (cur_position[X] - axis_x.position) + (cur_position[Y] - axis_y.position) * (cur_position[Y] - axis_y.position) <= 225)
+        {
+            double slope;
+            double speed_temp;
+            
+            slope = (cur_position[Y] - axis_y.position) / (1.0 * (cur_position[X] - axis_x.position));
+            
+            speed_temp = velocity[Y];
+            velocity[Y] = axis_y.velocity + (velocity[X] - 2 * axis_x.velocity) * slope;
+            velocity[X] = axis_x.velocity + (speed_temp - 2 * axis_y.velocity) / slope;
+            
+            collision_flag = stick_col;
+            if(on_collide != nullptr) on_collide();
+        }
     }
     
-    void Puck::update_position()
+    void Puck::update_position(double step_time)
     {
-        if(goal_flag > 0)
+        if (collision_flag == un_col)
         {
-            cur_position[X] = 50;
-            cur_position[Y] = 100;
+            cur_position[X] = cur_position[X] + step_time * velocity[X];
+            cur_position[Y] = cur_position[Y] + step_time * velocity[Y];
         }
+        
+        if (collision_flag != un_col)
+        {
+            cur_position[X] = cur_position[X] + step_time * velocity[X];
+            cur_position[Y] = cur_position[Y] + step_time * velocity[Y];
+        }
+        
+        ball_x.position = cur_position[X];
+        ball_y.position = cur_position[Y];
     }
     
     void Puck::update_velocity()
     {
         ball_x.velocity = velocity[X];
         ball_y.velocity = velocity[Y];
+    }
+    
+    void Puck::new_ball(AxisStatus new_ball_x, AxisStatus new_ball_y)
+    {
+        cur_position[X] = new_ball_x.position;
+	    cur_position[Y] = new_ball_y.position;
+	    
+        velocity[X] = new_ball_x.velocity;
+        velocity[Y] = new_ball_y.velocity;
+        
+        update_velocity();
+        ball_x.position = cur_position[X];
+        ball_y.position = cur_position[Y];
+    }
+	
+    void Puck::dWorldStep(double step_time)
+    {
+        check_collision();
+        update_velocity();
+        update_position(step_time);
     }
 
     Table::Table(double table_length, double table_width, double goal_length)
