@@ -19,6 +19,8 @@ namespace physics_engine {
     
     void Puck::check_collision()
     {
+        collision_flag = un_col;
+        
         if(cur_position[X] <= 5 || cur_position[X] >= 95) 
         {
             goal_flag = ungoal;
@@ -33,11 +35,7 @@ namespace physics_engine {
             {
                 if(cur_position[Y] <= 5) {goal_flag = lose; if(on_game_over != nullptr) on_game_over();}
                 if(cur_position[Y] >= 195) {goal_flag = win; if(on_game_over != nullptr) on_game_over();}
-
-                velocity[X] = 0;
-                velocity[Y] = 0;
                 
-                collision_flag = un_col;
             } else {velocity[Y] = -velocity[Y]; goal_flag = ungoal; collision_flag = table_col; if(on_collide != nullptr) on_collide();}
         }
         
@@ -67,8 +65,8 @@ namespace physics_engine {
         
         if (collision_flag != un_col)
         {
-            cur_position[X] = cur_position[X] + step_time * velocity[X] / 2;
-            cur_position[Y] = cur_position[Y] + step_time * velocity[Y] / 2;
+            cur_position[X] = cur_position[X] + step_time * velocity[X];
+            cur_position[Y] = cur_position[Y] + step_time * velocity[Y];
         }
         
         ball_x.position = cur_position[X];
