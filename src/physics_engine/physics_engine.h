@@ -43,7 +43,7 @@ namespace task_physics_engine {
 
         void dWorldStep(double step_time);//更新物理状态
         Puck(double r = default_puck_radius, double m = default_puck_mass);
-        new_ball(AxisStatus new_ball_x, AxisStatus new_ball_y);
+        void new_ball(AxisStatus new_ball_x, AxisStatus new_ball_y);
     };
 
     class Table{
