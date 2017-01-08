@@ -4,7 +4,7 @@
 #include <rtdk.h>
 #include "common.h"
 
-namespace task_physics_engine {
+namespace physics_engine {
     Puck::Puck(double puck_radius, double puck_mass)
     {
         radius = puck_radius;
@@ -23,7 +23,7 @@ namespace task_physics_engine {
         {
             goal_flag = ungoal;
             velocity[X] = -velocity[X];
-	        collision_flag = table_col;
+            collision_flag = table_col;
         }
         
         if(cur_position[Y] <= 5 || cur_position[Y] >= 195)
