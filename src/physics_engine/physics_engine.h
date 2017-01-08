@@ -19,7 +19,7 @@ namespace task_physics_engine {
     static double default_table_width = 100;//球桌宽100mm
     
     static double default_hockey_stick_radius = 10;//击球器半径10mm
-    static double default_hockey_stick_mass = 5;
+    static double default_hockey_stick_mass = 5;//击球器质量5kg
     
     static double default_goal_length = 30;//球门长度30mm，位于短边中央
     
@@ -41,8 +41,9 @@ namespace task_physics_engine {
         double velocity[AXIS_COUNT];
         double mass;
 
-        void dWorldStep();//更新物理状态
+        void dWorldStep(double step_time);//更新物理状态
         Puck(double r = default_puck_radius, double m = default_puck_mass);
+        new_ball(AxisStatus new_ball_x, AxisStatus new_ball_y);
     };
 
     class Table{
