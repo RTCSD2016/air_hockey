@@ -2,76 +2,82 @@
 // Created by troy on 12/30/16.
 //
 
+
 #pragma once
 
 #ifndef AIR_HOCKEY_PHYSICS_ENGINE_H
 #define AIR_HOCKEY_PHYSICS_ENGINE_H
 
 namespace task_physics_engine {
-    enum direction_vector{ X, Y, AXIS_COUNT };
-    enum flag1{ ungoal, win,lose }goal_flag;//è¿›çƒæ ‡å¿—
-    enum flag2{ table_col, stick_col }collision_flag;//ç¢°æ’æ ‡å¿—
+    void main(void *arg);
+	double get_step_time(){
+	};
 
-    static double default_puck_radius = 5;//åŠå¾„5mm	
-    static double default_puck_mass = 1;//è´¨é‡1kg
-    
-    static double default_table_length = 200;//çƒæ¡Œé•¿200mm
-    static double default_table_width = 100;//çƒæ¡Œå®½100mm
-    
-    static double default_hockey_stick_radius = 10;//å‡»çƒå™¨åŠå¾„10mm
-    static double default_hockey_stick_mass = 5kg;
-    
-    static double default_goal_length = 30;//çƒé—¨é•¿åº¦30mmï¼Œä½äºçŸ­è¾¹ä¸­å¤®
 
-    class Puck{
-    private:
-        double collision_time;
-        double collision_position[AXIS_COUNT];
+	enum direction_vector{ X, Y, AXIS_COUNT };
+	enum flag1{ ungoal, win, lose }goal_flag ;//½øÇò±êÖ¾
+	enum flag2{ un_col, table_col, stick_col }collision_flag ;//Åö×²±êÖ¾
 
-        void check_collision();//æ£€æŸ¥ç¢°æ’
-        void update_position();//æ›´æ–°ä½ç½®
-        void update_velocity();//æ›´æ–°é€Ÿåº¦
+	static double default_puck_radius = 0;
+	static double default_puck_mass = 0;
 
-    protected:
+	static double default_table_length = 0;
+	static double default_table_width = 0;
 
-    public:
-        double radius;
-        double mass;
-        double pre_position[AXIS_COUNT], cur_position[AXIS_COUNT];//ä¸Šä¸€æ­¥å’Œç°åœ¨çš„ä½ç½®
-        double velocity[AXIS_COUNT];
-        double mass;
+	static double default_hockey_stick_radius = 0;
+	static double default_hockey_stick_mass = 0;
+	
+	static double default_goal_length;
 
-        void dWorldStep();//æ›´æ–°ç‰©ç†çŠ¶æ€
-        Puck(double r = default_puck_radius, double m = default_puck_mass);
-    };
+class Puck{
+private:
+	double collision_time;
+	double collision_position[AXIS_COUNT];
 
-    class Table{
-    private:
+	void check_collision();//¼ì²éÅö×²
+	void update_position();//¸üĞÂÎ»ÖÃ
+	void update_velocity();//¸üĞÂËÙ¶È
 
-    protected:
+protected:
 
-    public:
-        double length;
-        double width;
-        double goalline;
+public:
+	double radius;
+	double mass;
+	double pre_position[AXIS_COUNT], cur_position[AXIS_COUNT];//ÉÏÒ»²½ºÍÏÖÔÚµÄÎ»ÖÃ
+	double velocity[AXIS_COUNT];
+	double mass;
 
-        Table(double table_length = default_table_length, double table_width = default_table_width, double goal_length = default_goal_length){};
-    };
+	void PuckStep();//¸üĞÂÎïÀí×´Ì¬
+	Puck(double puck_radius = default_puck_radius, double puck_mass = default_puck_mass);
+};
 
-    class Hockey_stick{
-    private:
-        void stick_checkstep(){};
-    protected:
+class Table{
+private:
 
-    public:
-        double radius;
-        double mass;
-        double pre_position[AXIS_COUNT], cur_position[AXIS_COUNT];
-        double velocity[AXIS_COUNT];
+protected:
 
-        Hockey_stick(double hockey_stick_radius = default_hockey_stick_radius, double hockey_stick_mass = default_hockey_stick_mass){};	
-        void stick_check();//å‡»çƒå™¨é™ä½
-    };
+public:
+	double length;
+	double width;
+	double goalline;
+
+	Table(double table_length = default_table_length, double table_width = default_table_width, double goal_length1 = default_goal_length){};
+};
+
+class Hockey_stick{
+private:
+	
+protected:
+	
+public:
+	double radius;
+	double mass;
+	double pre_position[AXIS_COUNT], cur_position[AXIS_COUNT];
+	double velocity[AXIS_COUNT];
+
+	Hockey_stick(double hockey_stick_radius = default_hockey_stick_radius, double hockey_stick_mass = default_hockey_stick_mass){};				
+	void stick_checkstep(){};
+};
 }
 
 #endif //AIR_HOCKEY_PHYSICS_ENGINE_H
