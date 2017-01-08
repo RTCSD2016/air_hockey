@@ -40,6 +40,8 @@ namespace physics_engine {
         double pre_position[AXIS_COUNT], cur_position[AXIS_COUNT];//上一步和现在的位置
         double velocity[AXIS_COUNT];
         double mass;
+        void (*on_collide)(void) = nullptr;
+        void (*on_game_over)(void) = nullptr;
 
         void dWorldStep(double step_time);//更新物理状态
         Puck(double r = default_puck_radius, double m = default_puck_mass);
