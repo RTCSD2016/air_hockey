@@ -23,6 +23,7 @@ namespace task_physics_engine {
         {
             goal_flag = ungoal;
             velocity[X] = -velocity[X];
+	        collision_flag = table_col;
         }
         
         if(cur_position[Y] <= 5 || cur_position[Y] >= 195)
@@ -34,7 +35,9 @@ namespace task_physics_engine {
 
                 velocity[X] = 0;
                 velocity[Y] = 0;
-            } else {velocity[Y] = -velocity[Y]; goal_flag = ungoal}
+                
+                collision_flag = un_col;
+            } else {velocity[Y] = -velocity[Y]; goal_flag = ungoal;collision_flag = table_col;}
         }
         
         if((cur_position[X] - axis_x.position) * (cur_position[X] - axis_x.position) + (cur_position[Y] - axis_y.position) * (cur_position[Y] - axis_y.position) <= 225)
@@ -47,6 +50,8 @@ namespace task_physics_engine {
             speed_temp = velocity[Y];
             velocity[Y] = axis_y.velocity + (velocity[X] - 2 * axis_x.velocity) * slope;
             velocity[X] = axis_x.velocity + (speed_temp - 2 * axis_y.velocity) / slope;
+            
+            collision_flag = stick_col;
         }
     }
     
