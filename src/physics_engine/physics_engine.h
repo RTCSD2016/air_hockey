@@ -7,7 +7,7 @@
 #ifndef AIR_HOCKEY_PHYSICS_ENGINE_H
 #define AIR_HOCKEY_PHYSICS_ENGINE_H
 
-namespace task_physics_engine {
+namespace physics_engine {
     enum direction_vector{ X, Y, AXIS_COUNT };
     enum flag1{ ungoal, win,lose } goal_flag;//进球标志
     enum flag2{ un_col, table_col, stick_col } collision_flag;//碰撞标志
