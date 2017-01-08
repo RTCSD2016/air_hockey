@@ -24,20 +24,21 @@ namespace physics_engine {
             goal_flag = ungoal;
             velocity[X] = -velocity[X];
             collision_flag = table_col;
+            if(on_collide != nullptr) on_collide();
         }
         
         if(cur_position[Y] <= 5 || cur_position[Y] >= 195)
         {
             if(cur_position[X] < 65 && cur_position[X] > 35)
             {
-                if(cur_position[Y] <= 5) goal_flag = lose;
-                if(cur_position[Y] >= 195) goal_flag = win;
+                if(cur_position[Y] <= 5) {goal_flag = lose; if(on_game_over != nullptr) on_game_over();}
+                if(cur_position[Y] >= 195) {goal_flag = win; if(on_game_over != nullptr) on_game_over();}
 
                 velocity[X] = 0;
                 velocity[Y] = 0;
                 
                 collision_flag = un_col;
-            } else {velocity[Y] = -velocity[Y]; goal_flag = ungoal;collision_flag = table_col;}
+            } else {velocity[Y] = -velocity[Y]; goal_flag = ungoal; collision_flag = table_col; if(on_collide != nullptr) on_collide();}
         }
         
         if((cur_position[X] - axis_x.position) * (cur_position[X] - axis_x.position) + (cur_position[Y] - axis_y.position) * (cur_position[Y] - axis_y.position) <= 225)
@@ -52,6 +53,7 @@ namespace physics_engine {
             velocity[X] = axis_x.velocity + (speed_temp - 2 * axis_y.velocity) / slope;
             
             collision_flag = stick_col;
+            if(on_collide != nullptr) on_collide();
         }
     }
     
