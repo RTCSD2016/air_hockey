@@ -22,7 +22,7 @@ namespace physics_engine {
     static double default_hockey_stick_mass = 5;//击球器质量5kg
     
     static double default_goal_length = 30;//球门长度30mm，位于短边中央
-    
+
     class Puck{
     private:
         double collision_time;

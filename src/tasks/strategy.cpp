@@ -45,6 +45,7 @@ namespace task_strategy {
     }
 
     void main(void *arg) {
+        UNUSED(arg);
         unsigned long mask;
         rt_printf("[strategy] hello\n");
 

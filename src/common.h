@@ -8,6 +8,9 @@
 #include <native/event.h>
 #include <native/queue.h>
 
+// Some useful macros
+#define UNUSED(x) ((void)(x))
+
 typedef struct {
     double position;
     double velocity;
@@ -23,6 +26,10 @@ namespace event_mask {
     const unsigned long kRequest = 0x01;
     const unsigned long kDone = 0x02;
     const unsigned long kTerminate = 0x04;
+    const unsigned long kCollide = 0x08;
+    const unsigned long kServe = 0x10;
+    const unsigned long kGameOver = 0x20;
+
     const unsigned long kError = 0x80000000;
     const unsigned long kAny= 0xffffffff;
 }
