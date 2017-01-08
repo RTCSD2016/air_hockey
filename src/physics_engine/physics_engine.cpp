@@ -52,12 +52,6 @@ namespace task_physics_engine {
     
     void Puck::update_position(double step_time)
     {
-        if(goal_flag != ungoal)
-        {
-            cur_position[X] = 50;
-            cur_position[Y] = 100;
-        }
-        
         if (collision_flag == un_col)
         {
             cur_position[X] = cur_position[X] + step_time * velocity[X];
@@ -71,7 +65,7 @@ namespace task_physics_engine {
         }
         
         ball_x.position = cur_position[X];
-		ball_y.position = cur_position[Y];
+        ball_y.position = cur_position[Y];
     }
     
     void Puck::update_velocity()
@@ -80,11 +74,24 @@ namespace task_physics_engine {
         ball_y.velocity = velocity[Y];
     }
     
+    void Puck::new_ball(AxisStatus new_ball_x, AxisStatus new_ball_y)
+    {
+        cur_position[X] = new_ball_x.position;
+	    cur_position[Y] = new_ball_y.position;
+	    
+        velocity[X] = new_ball_x.velocity;
+        velocity[Y] = new_ball_y.velocity;
+        
+        update_velocity();
+        ball_x.position = cur_position[X];
+        ball_y.position = cur_position[Y];
+    }
+	
     void Puck::dWorldStep(double step_time)
     {
         check_collision();
-		update_velocity();
-		update_position(step_time);
+        update_velocity();
+        update_position(step_time);
     }
 
     Table::Table(double table_length, double table_width, double goal_length)
