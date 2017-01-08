@@ -20,8 +20,8 @@ namespace task_physics_engine {
         static double step_time;
         
         goal_flag = ungoal;
-		collision_flag = un_col;
-		cur_time = rt_timer_read();
+        collision_flag = un_col;
+        cur_time = rt_timer_read();
 
         while (1) {
             rt_event_wait(&event,
