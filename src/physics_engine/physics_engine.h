@@ -29,7 +29,7 @@ namespace task_physics_engine {
         double collision_position[AXIS_COUNT];
 
         void check_collision();//检查碰撞
-        void update_position();//更新位置
+        void update_position(double step_time);//更新位置
         void update_velocity();//更新速度
 
     protected:
