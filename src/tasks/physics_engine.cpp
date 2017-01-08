@@ -19,6 +19,10 @@ namespace task_physics_engine {
         static double cur_time;
         static double step_time;
         
+        Puck ice_ball = Puck();
+        Table ice_table = Table();
+        Hockey_stick ice_stick = Hockey_stick();
+        
         goal_flag = ungoal;
         collision_flag = un_col;
         cur_time = rt_timer_read();
@@ -36,6 +40,9 @@ namespace task_physics_engine {
             pre_time = cur_time;
             cur_time = rt_timer_read();
             step_time = (cur_time - pre_time)/1000000.0;
+            
+            ice_stick.stick_check();
+            ice_ball.dWorldStep(step_time);
         }
 
         PHYSICS_ENGINE_TERMINATE:
