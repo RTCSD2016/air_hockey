@@ -24,7 +24,7 @@ void TrapezoidInterpolationTest::base_function() {
     CPPUNIT_ASSERT_DOUBLES_EQUAL(150, algorithm.get_position(), 0.1);
     CPPUNIT_ASSERT_DOUBLES_EQUAL(30, algorithm.get_velocity(), 0.1);//判断匀速过程中某一时刻的速度和位移是否正确
 	
-    algorithm.move(12);
+    algorithm.move(14);
     CPPUNIT_ASSERT_DOUBLES_EQUAL(290, algorithm.get_position(), 0.1);
     CPPUNIT_ASSERT_DOUBLES_EQUAL(10, algorithm.get_velocity(), 0.1);//判断正向减速过程中某一时刻的速度和位移是否正确
     
