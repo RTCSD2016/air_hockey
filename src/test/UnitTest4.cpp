@@ -1,7 +1,7 @@
 #include "TrapezoidInterpolationTest.h"
 #include "interpolation/trapezoid_interpolation.h"
 
-CPPUNIT_TEST_SUITE_REGISTRATION(TrapezoidInterpolationTest);                      // 注册到全局测试集
+CPPUNIT_TEST_SUITE_REGISTRATION(TrapezoidInterpolationTest);                     // 注册到全局测试集
 CPPUNIT_TEST_SUITE_NAMED_REGISTRATION(TrapezoidInterpolationTest, "trapezoid");
 
 /**
