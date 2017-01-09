@@ -5,7 +5,7 @@ CPPUNIT_TEST_SUITE_REGISTRATION(TrapezoidInterpolationTest);                    
 CPPUNIT_TEST_SUITE_NAMED_REGISTRATION(TrapezoidInterpolationTest, "trapezoid");
 
 /**
- * @brief 测试：判断在反向运动目标速度正向过程中某一时刻的速度和位移是否正确
+ * @brief 测试：判断在反向运动（目标位移反向）目标速度正向过程中某一时刻的速度和位移是否正确
  */
 void TrapezoidInterpolationTest::base_function() {
     TrapezoidInterpolation algorithm;
