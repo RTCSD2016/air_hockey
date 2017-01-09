@@ -5,9 +5,11 @@
 #include "physics_engine.h"
 
 #include <native/task.h>
+#include <native/timer.h>
 
 #include <rtdk.h>
 #include "common.h"
+#include <physics_engine/physics_engine.h>
 
 namespace task_physics_engine {
     void send_event_collide(void) {
