@@ -34,13 +34,14 @@ InterpolationState TrapezoidInterpolation::start(const TimeInS now,
     x = target_position - start_position;
     a = max_acceleration;
     b = target_velocity - start_velocity + a * t;
-    c = start_velocity * t - x - (start_velocity - target_velocity) * (start_velocity - target_velocity) / (2 * a);
+    c = start_velocity * t - x
+        - (start_velocity - target_velocity) * (start_velocity - target_velocity) / (2 * a);
 
     delta_t1 = (b - sqrt(b * b + 4 * a * c)) / (2 * a);
     delta_t3 = (start_velocity - target_velocity) / a + delta_t1;
     delta_t2 = t - delta_t1 - delta_t3;
 
-    state = kAcceleration;
+    this->state = kAcceleration;
     t0 = now;
     s0.position = start_position;
     s0.velocity = start_velocity;
@@ -74,10 +75,10 @@ InterpolationState TrapezoidInterpolation::move(const TimeInS now) {
                 state = kLinear;
                 // No Break; Linear Uniform Moving at once
             } else {
+                this->acceleration = s0.acceleration;
+                this->velocity = s0.velocity + this->acceleration * (now - t0);
                 this->position = s0.position + s0.velocity * (now - t0)
                                  + 0.5 * this->acceleration * (now - t0) * (now - t0);
-                this->velocity = s0.velocity + this->acceleration * (now - t0);
-                this->acceleration = s0.acceleration;
                 return kIntRunning;
             }
             // Linear Uniform Moving
@@ -89,9 +90,9 @@ InterpolationState TrapezoidInterpolation::move(const TimeInS now) {
                 state = kDeceleration;
                 // No Break; Decelerating at once
             } else {
-                this->position = s1.position + s1.velocity * (now - t1);
-                this->velocity = s1.velocity;
                 this->acceleration = s1.acceleration;
+                this->velocity = s1.velocity;
+                this->position = s1.position + s1.velocity * (now - t1);
                 return kIntRunning;
             }
         case kDeceleration:
@@ -102,10 +103,10 @@ InterpolationState TrapezoidInterpolation::move(const TimeInS now) {
                 state = kEnd;
                 // No Break; Stop at once
             } else {
+                this->acceleration = s2.acceleration;
+                this->velocity = s2.velocity + this->acceleration * (now - t2);
                 this->position = s2.position + s2.velocity * (now - t2)
                                  + 0.5 * this->acceleration * (now - t2) * (now - t2);
-                this->velocity = s2.velocity + this->acceleration * (now - t2);
-                this->acceleration = s2.acceleration;
                 return kIntRunning;
             }
         case kEnd:
