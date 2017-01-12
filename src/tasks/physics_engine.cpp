@@ -9,7 +9,7 @@
 
 #include <rtdk.h>
 #include "common.h"
-#include <physics_engine/physics_engine.h>
+//#include <physics_engine/physics_engine.h>
 
 namespace task_physics_engine {
     void send_event_collide(void) {
@@ -25,6 +25,7 @@ namespace task_physics_engine {
         rt_printf("[physics_engine] hello\n");
 
         unsigned long mask;
+        /*
         static double pre_time;
         static double cur_time;
         static double step_time;
@@ -36,7 +37,7 @@ namespace task_physics_engine {
         goal_flag = ungoal;
         collision_flag = un_col;
         cur_time = rt_timer_read();
-
+*/
         while (1) {
             rt_event_wait(&event,
                           event_mask::kTerminate,
@@ -46,13 +47,15 @@ namespace task_physics_engine {
             if (mask & event_mask::kTerminate)
                 goto PHYSICS_ENGINE_TERMINATE;
             rt_printf("[physics_engine] I'm waiting for codes...\n");
-            
+
+            /*
             pre_time = cur_time;
             cur_time = rt_timer_read();
             step_time = (cur_time - pre_time)/1000000.0;
             
             ice_stick.stick_check();
             ice_ball.dWorldStep(step_time);
+             */
         }
 
         PHYSICS_ENGINE_TERMINATE:

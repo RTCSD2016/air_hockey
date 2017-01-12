@@ -21,12 +21,12 @@ LINK_DIRECTORIES(${ODE_LIBRARIES_DIRS})
 ADD_EXECUTABLE(air_hockey main.cpp common.cpp)
 
 ADD_SUBDIRECTORY(interpolation)
-ADD_SUBDIRECTORY(physics_engine)
+#ADD_SUBDIRECTORY(physics_engine)
 ADD_SUBDIRECTORY(tasks)
 
 TARGET_LINK_LIBRARIES(air_hockey ${XENOMAI_NATIVE_SKIN_LIBS})
 TARGET_LINK_LIBRARIES(air_hockey ${ODE_LIBS})
-TARGET_LINK_LIBRARIES(air_hockey interpolation physics_engine tasks)
+TARGET_LINK_LIBRARIES(air_hockey tasks interpolation)
 
 # =========== TEST ===========
 find_package(CppUnit)

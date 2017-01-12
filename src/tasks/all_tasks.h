@@ -9,5 +9,6 @@
 #include "strategy.h"
 #include "physics_engine.h"
 #include "ball_server.h"
+#include "task_debug.h"
 
 #endif //AIR_HOCKEY_ALL_TASKS_H
